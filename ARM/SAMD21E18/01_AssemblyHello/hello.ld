@@ -1,11 +1,3 @@
-/* sets the entry point address */
-/* first piece of code that executes after reset */
-/* ENTRY(_symbol_name_) */
-/* "Reset_Handler" in the .elf of many ARM sdks */
-/* Syntax: ENTRY(_symbol_name_) */
-/* Not in example because there are only two th
-/*ENTRY(on_reset)*/
-
 
 MEMORY {
     /* Syntax: name(attr): ORIGIN = int, LENGTH = int */
