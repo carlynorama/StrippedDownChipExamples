@@ -46,9 +46,6 @@ all: $(TARGET).elf
 %.elf: $(OBJECTS)
 	 $(CC) $(LDFLAGS) $(OBJECTS) $(LINKONLYOBJECTS)  -T./$(LINKER_FILE) -o $(TARGET).elf
 
-#erase:
-	
-
 # Program the device.  
 program: $(TARGET).elf
 	$(PROGRAMMER) $(PROGRAMMER_FLAGS)
