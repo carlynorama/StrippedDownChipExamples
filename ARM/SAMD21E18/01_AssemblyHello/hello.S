@@ -6,8 +6,10 @@
 .thumb  //name for the ARM Cortex-M instruction set
 
 // Global memory locations.
-.global vector_table
+//don't put anthing above the fake vector table. 
+.global vector_table 
 .global on_reset
+
 
 /*
  * interupt vector table

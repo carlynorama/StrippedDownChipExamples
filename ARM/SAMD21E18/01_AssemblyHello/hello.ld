@@ -3,7 +3,8 @@
 /* ENTRY(_symbol_name_) */
 /* "Reset_Handler" in the .elf of many ARM sdks */
 /* Syntax: ENTRY(_symbol_name_) */
-ENTRY(on_reset)
+/* Not in example because there are only two th
+/*ENTRY(on_reset)*/
 
 
 MEMORY {
