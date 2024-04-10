@@ -3,7 +3,7 @@
 ###############################################################################
 
 ## General Flags
-TARGET ?= hello_main #set if not defined 
+TARGET ?= hello_startup#set if not defined 
 LINKER_FILE ?= $(TARGET).ld
 MACH = cortex-m0
 
@@ -18,12 +18,13 @@ COMMON += -mthumb
 CFLAGS = $(COMMON)
 CFLAGS += -Wall
 CFLAGS += -g -c
-CFLAGS += -Os
+##CFLAGS += -Os  ##keep the vars in the elf
 
 
 ## Linker flags
 LDFLAGS = $(COMMON)
 LDFLAGS += --specs=nosys.specs -nostdlib -lgcc
+LDFLAGS += -Wl,-Map=$(TARGET).map
 
 ## Objects that must be built in order to link
 OBJECTS = $(TARGET).o 
@@ -36,7 +37,7 @@ PROGRAMMER = openocd
 PROGRAMMER_FLAGS = -f program_and_serve.cfg
 
 ## Build
-all: $(TARGET).elf
+all: $(TARGET).elf $(TARGET).lss
 
 ## Compile
 %.o : %.S
@@ -45,6 +46,9 @@ all: $(TARGET).elf
 ##Link
 %.elf: $(OBJECTS)
 	 $(CC) $(LDFLAGS) $(OBJECTS) $(LINKONLYOBJECTS)  -T./$(LINKER_FILE) -o $(TARGET).elf
+	
+%.lss: $(TARGET).elf
+	arm-none-eabi-objdump -h -S $< > $@
 
 # Program the device.  
 program: $(TARGET).elf
@@ -56,5 +60,5 @@ disamb: $(TARGET).elf
 ## Clean target
 #.PHONY: clean
 clean:
-	-rm -rf $(OBJECTS) $(TARGET).elf 
+	-rm -rf $(OBJECTS) $(TARGET).elf $(TARGET).lss $(TARGET).map 
 

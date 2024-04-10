@@ -71,6 +71,7 @@ for debugging hello and hello derivatives.
 ## ^x o to switch between
 ## ^x a to close
 
+(gdb) layout reg
 (gdb) info registers
 (gdb) info register r0
 (gdb) info register r7  ##wont be the message yet
@@ -86,4 +87,25 @@ for debugging hello and hello derivatives.
 (gdb) info register r0
 # etc...
 ```
+
+Where 0x2000000 is the start of the memory location you'd like to get 10 values after.
+```zsh
+(gdb) x/10x 0x20000000
+```
+
+for checking startup routine v1 ()
+
+```zsh
+(gdb) layout reg
+## optional if want to watch it step through
+## can also break on one of the loop boundaries
+# or just stepi through
+(gdb) break zero_bss
+(gdb) break move_data_to_ram
+
+(gdb) break my_main
+    #stepi
+    #when r0 is ennie and make address note them so you can check
+    x/10x 0xMAKE_ADDRESS
+(gdb) break loop_start
 ```
