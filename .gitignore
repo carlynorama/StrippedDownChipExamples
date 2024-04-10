@@ -4,6 +4,7 @@
 *.o
 *.elf
 *.map
+*.less
 
 
 *.pdf

@@ -3,7 +3,7 @@
 ###############################################################################
 
 ## General Flags
-TARGET ?= hello#set if not defined 
+TARGET ?= hello_improved#set if not defined 
 LINKER_FILE ?= $(TARGET).ld
 MACH = cortex-m0
 
@@ -17,7 +17,7 @@ COMMON += -mthumb
 ## Compile options common for all C compilation units.
 CFLAGS = $(COMMON)
 CFLAGS += -Wall
-CFLAGS += -g
+CFLAGS += -g -v -c
 CFLAGS += -Os
 
 
@@ -46,16 +46,9 @@ all: $(TARGET).elf
 %.elf: $(OBJECTS)
 	 $(CC) $(LDFLAGS) $(OBJECTS) $(LINKONLYOBJECTS)  -T./$(LINKER_FILE) -o $(TARGET).elf
 
-
-# Program the device. 
-#.PHONY: program 
+# Program the device.  
 program: $(TARGET).elf
 	$(PROGRAMMER) $(PROGRAMMER_FLAGS)
-
-# Print the disassembly. 
-#.PHONY: disamb
-disamb: $(TARGET).elf
-	arm-none-eabi-objdump --disassemble $<
 
 ## Clean target
 #.PHONY: clean
