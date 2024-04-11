@@ -4,9 +4,8 @@
 
 ## What's in this folder
 
-I wanted to go from one of those hyper minimal examples to a more "adult" version.
+I wanted to go from one of those hyper minimal examples to a medium-minimal version.
 
-That took a lot of steps.
 
 ### a_hello_improved 
 
@@ -14,16 +13,18 @@ adds a minimal vector table (Just the Cortex-M0+ needed entries) and a minimal S
 
 ### b_hello_main
  
- works it way up splitting out the program code into its own section then into its own file. Also fleshes out the reset handler code. Still thumb-cores only syntax. 
+Works its way up splitting out the program code into its own section then into its own file. Also fleshes out the reset handler code. Still thumb-cores only syntax. 
 
-### c_hello_main_full 
+- single file with the "main loop" moved up to the top of the file (but not the entry point)
 
-fills out the whole vector table with all perifiperals. Switches the syntax to use macros so it's more reusable with other Cortex-M processors that don't use thumb mode. 
+- single file with a startup function that actually moves the data and clears the bss
+
+- program code and startup code no longer share a file. Vector table lists ALL the SAMD21E18 peripherals and provides default handlers that can be overridden (un tested). (TODO, the makefile needs some love.) 
 
 
-## Running without without the make file(s)
+## Running without the makefile(s)
 
-Sometimes the code isn't ready for the default make file...
+Handy direct commands for debugging before switching to makefile.
 
 Set the shell instance's target. (The included make files will use this variable, too.) 
 
@@ -32,7 +33,7 @@ export TARGET="hello_improved"
 env # to check
 ```
 
-handy direct commands for debugging before switching to make file
+
 
 ```zsh
 arm-none-eabi-as -v -g -c -Wall -mcpu=cortex-m0 -mthumb -o $TARGET.o $TARGET.s
@@ -49,13 +50,14 @@ arm-none-eabi-nm $TARGET.elf
 arm-none-eabi-nm --numeric-sort $TARGET.elf
 arm-none-eabi-objcopy -O binary $TARGET.elf $TARGET.bin
 
-arm-none-eabi-gcc -nostdlib -T./$TARGET.ld *.o -o combined.elf
+arm-none-eabi-gcc -g -Wall -nostdlib -T./$TARGET.ld *.o -o combined.elf
 
 ```
 
-arm-none-eabi-gcc -g -Wall -nostdlib -T./$TARGET.ld *.o -o combined.elf
 
-debugging
+
+## Debugging
+
 
 ```bash
 cd $YOUR_PROJECT_FOLDER

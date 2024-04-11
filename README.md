@@ -1,10 +1,43 @@
 # Stripped Down Chip Examples
 
+What would it take to replace C in embedded computing? That's a question both Rust and Swift have started to ask.
 
-More documentation on its way, but in the mean time: 
+So I'm poking around with different chips, gathering educational resources, at different levels and throwing all the code in here. The goal is for each folder to be self-contained, have a supporting post. 
 
-- https://www.whynotestflight.com/excuses/hello-led-on-an-avr-attiny45-in-c/
+## AVR
+
+### ATTiny44 (Breadboard)
+
+https://www.whynotestflight.com/excuses/hello-led-on-an-avr-attiny45-in-c/
+
+One folder with both a blink example and using a switch to control an LED example in one page of C each.  Relies heavily on avr-gcc doing its thing. Avrdude as programming software. Highly recommend [this YouTube series](https://www.youtube.com/playlist?list=PLNyfXcjhOAwOF-7S-ZoW2wuQ6Y-4hfjMR), as the post assumes you already know what it's covered. 
+
+## ARM
+
+Arm chips are so easy with their drag and drop UF2 programming. I honestly never bothered to try to go around that. Whelp.
+
+### Coretex-M0+ - SAMD21E18 (Teensy with soldered leads)
+
+arm-gcc, OpenOCD, GDB, Jlink
+
+#### 01_AssemblyHello (no bootloader)
+
 - https://www.whynotestflight.com/excuses/how-can-i-make-programming-an-arm-chip-as-hard-as-possible/
+
+Proof that the tool chain works. Minimum code + linker file to twiddle registers. Required GDB to work to see anything. 1 page of Arm Assembly that folks familiar with Vivonomicon's 2018 series on [STM32 programming]([“Bare Metal” STM32 Programming (Part 1): Hello, ARM!](https://vivonomicon.com/2018/04/02/bare-metal-stm32-programming-part-1-hello-arm/)) will find familiar! Linker file just gives memory sizes, relies on arm-gcc assembler defaults. 
+
+
+#### 02_AssemblyStartup (no bootloader)
+
+- 
+
+Still 100% this new fangled Assembly with dots and C style comments and things! Warning - I need to find a linter. Went to a thumb-only compliant syntax that doesn't require the .type macros to see the difference.  2 Folders 
+    
+    - one with a single page script and linker file with minimal SECTION. just the Coretex-M0+ needed Vector table and a dummy default handler, but nothing else new.
+
+    - works from previous folder into a 2 page setup with a startup.s and main.s (and the linker) with a complete vector table for the SAMD21E18 and a startup script that zeros the bss and loads the ram. Lots of variables in main.s to test that it worked. 
+
+
 
 
 ## Official Documentation for Toolchain Used
@@ -21,7 +54,6 @@ More documentation on its way, but in the mean time:
 - https://sourceware.org/gdb/
 - https://openocd.org/pages/documentation.html
 - https://avrdudes.github.io/avrdude/7.3/avrdude.html
-
 
 
 

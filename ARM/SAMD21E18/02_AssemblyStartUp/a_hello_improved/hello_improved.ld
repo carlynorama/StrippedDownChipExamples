@@ -6,7 +6,7 @@ MEMORY {
 sp_initial_value = ORIGIN(sram) + LENGTH(sram);  /* 0x20008000 */
 
 SECTIONS {
-    .text   : {  *(.text)  } > flash
+    .text   : { *(.text)  } > flash
     .rodata : { *(.rodata) } > sram AT> flash
     .bss    : { *(.bss)    } > sram
 }
