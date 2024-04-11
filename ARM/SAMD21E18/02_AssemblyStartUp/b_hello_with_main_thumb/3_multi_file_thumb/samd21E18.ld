@@ -15,7 +15,7 @@ SECTIONS {
 
     .text : { 
         /* The Top! */
-        hello_startup.o(.vectors)  /* do the one from this file first */
+        startup.o(.vectors)  /* do the one from this file first */
         KEEP(*(.vectors .vectors.*)) /* do any in other files jic */
         /* . = 0xB4  /* HACK: could force the linker to jump expected end of vector table  */
         /* I want things realted to this code to come to the top */

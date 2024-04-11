@@ -46,7 +46,7 @@ increment: .word 1
 .section .text.program_code
 
 .thumb_func
-.word my_main
+.global my_main
 my_main:
   /* note to self main started finished */
   LDR  r7, =0x0000CCCC

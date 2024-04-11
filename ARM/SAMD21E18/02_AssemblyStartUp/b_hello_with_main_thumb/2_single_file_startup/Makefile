@@ -18,7 +18,7 @@ COMMON += -mthumb
 CFLAGS = $(COMMON)
 CFLAGS += -Wall
 CFLAGS += -g -c
-##CFLAGS += -Os  ##keep the vars in the elf
+##CFLAGS += -Os  
 
 
 ## Linker flags
