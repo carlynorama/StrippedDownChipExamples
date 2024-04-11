@@ -32,6 +32,7 @@ vector_table:
   .weakref systick_handler, default_handler
 
 .word default_handler
+.thumb_func
 default_handler:
    ldr r3, =#0x8BADF00D
    //hangs the program.

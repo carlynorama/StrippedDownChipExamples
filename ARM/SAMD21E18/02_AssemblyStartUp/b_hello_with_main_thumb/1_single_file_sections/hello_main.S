@@ -28,6 +28,7 @@ vector_table:
 
 .section .text.default_handler
 .word default_handler
+.thumb_func
 default_handler:
    ldr r3, =#0x8BADF00D
    //hangs the program.

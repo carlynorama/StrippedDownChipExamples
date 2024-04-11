@@ -3,73 +3,12 @@
 .fpu softvfp 
 .thumb  
 
-.bss 
-/* note, bss is marked noload in the linker */
-/* no matter how long, shouldn't effect size of elf */
-/* assembler wont let you store values that aren't 0 */
-make: .word 0
-something: .word 0
-be: .word 0
-here: .word 0
-
-.data
-/* like define, but tricksy. */
-.equ pelargonium, 0x600dCA7
-.equ rosebud, 0xF0CACC1A
-
-/* variables with values */
-ennie:  .word  124
-meenie: .word  125
-mineie: .word  126
-moe:    .word  127
-
-@ this is NOT how you create unallocated memory
-@ these all point to the same place in memory. 
-breakfast:  .word
-lunch:      .word
-dinner:     .word
-midnight_snack: .word 27 
-
-adr_ennie: .word ennie
-adr_meenie: .word meenie
-adr_mineie: .word mineie 
-adr_moe: .word moe
-adr_breakfast: .word breakfast
-adr_lunch: .word lunch
-adr_dinner: .word dinner
-adr_midnight_snack: .word midnight_snack
-
-adr_make: .word make
-
-increment: .word 1
-
-.section .text.program_code
-
-.thumb_func
-.word my_main
-my_main:
-  /* note to self main started finished */
-  LDR  r7, =0x0000CCCC
-
-  @ values of the unallocated should match
-  @ ennie-moe after done with this. 
-  LDR r0, =ennie
-  ldmia r0!, {r1-r4}
-  LDR r0, =make
-  stmia r0!, {r1-r4}
-  
-  /* start with 0 */
-  movs r0, #0
-  loop_start:
-    // Add 1 to register 'r0'.
-    ADDS r0, r0, #1
-  b loop_start
-
 .section  .vectors
 .global vector_table
 vector_table:
+    //-------------- arm core list
     .word   _end_stack //edge of stack, set in linker
-    .word   reset_handler   //reset handler
+    .word   reset_handler //reset handler
     .word   nmi_handler
     .word   hard_fault_handler
     .word   0//not in M0+
@@ -84,11 +23,43 @@ vector_table:
     .word   0//not in M0+
     .word   pendsv_handler
     .word   systick_handler
+    //-------------- peripherals list
+    .word   PM_Handler
+    .word   SYSCTRL_Handler
+    .word   WDT_Handler
+    .word   RTC_Handler
+    .word   EIC_Handler
+    .word   NVMCTRL_Handler
+    .word   DMAC_Handler
+    .word   USB_Handler
+    .word   EVSYS_Handler
+    .word   SERCOM0_Handler
+    .word   SERCOM1_Handler
+    .word   SERCOM2_Handler
+    .word   SERCOM3_Handler
+    .word   SERCOM4_Handler
+    .word   SERCOM5_Handler
+    .word   TCC0_Handler
+    .word   TCC1_Handler
+    .word   TCC2_Handler
+    .word   TC3_Handler
+    .word   TC4_Handler
+    .word   TC5_Handler
+    .word   TC6_Handler
+    .word   TC7_Handler
+    .word   ADC_Handler
+    .word   AC_Handler
+    .word   DAC_Handler
+    .word   PTC_Handler
+    .word   I2S_Handler
+    .word   AC1_Handler
+    .word   TCC3_Handler
 
 .text
 
 .section .text.default_handler
 .word default_handler
+.thumb_func
 default_handler:
    ldr r3, =#0x8BADF00D
    //hangs the program.
@@ -100,9 +71,39 @@ default_handler:
 .weakref pendsv_handler, default_handler
 .weakref systick_handler, default_handler
 
+.weakref PM_Handler, default_handler
+.weakref SYSCTRL_Handler, default_handler
+.weakref WDT_Handler, default_handler
+.weakref RTC_Handler, default_handler
+.weakref EIC_Handler, default_handler
+.weakref NVMCTRL_Handler, default_handler
+.weakref DMAC_Handler, default_handler
+.weakref USB_Handler, default_handler
+.weakref EVSYS_Handler, default_handler
+.weakref SERCOM0_Handler, default_handler
+.weakref SERCOM1_Handler, default_handler
+.weakref SERCOM2_Handler, default_handler
+.weakref SERCOM3_Handler, default_handler
+.weakref SERCOM4_Handler, default_handler
+.weakref SERCOM5_Handler, default_handler
+.weakref TCC0_Handler, default_handler
+.weakref TCC1_Handler, default_handler
+.weakref TCC2_Handler, default_handler
+.weakref TC3_Handler, default_handler
+.weakref TC4_Handler, default_handler
+.weakref TC5_Handler, default_handler
+.weakref TC6_Handler, default_handler
+.weakref TC7_Handler, default_handler
+.weakref ADC_Handler, default_handler
+.weakref AC_Handler, default_handler
+.weakref DAC_Handler, default_handler
+.weakref PTC_Handler, default_handler
+.weakref I2S_Handler, default_handler
+.weakref AC1_Handler, default_handler
+.weakref TCC3_Handler, default_handler
+
 
 .section .text.reset_handler
-
 @ The Reset Handler 
 .global reset_handler
 .thumb_func
