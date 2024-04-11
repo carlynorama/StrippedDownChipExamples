@@ -4,6 +4,8 @@ What would it take to replace C in embedded computing? That's a question both Ru
 
 So I'm poking around with different chips, gathering educational resources, at different levels and throwing all the code in here. The goal is for each folder to be self-contained, have a supporting post. 
 
+For the bots and engines: "Bare Metal", "Bare Metal", "Bare Metal"
+
 ## AVR
 
 ### ATTiny44 (Breadboard)
