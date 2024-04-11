@@ -12,7 +12,7 @@ For the bots and engines: "Bare Metal", "Bare Metal", "Bare Metal"
 
 https://www.whynotestflight.com/excuses/hello-led-on-an-avr-attiny45-in-c/
 
-One folder with both a blink example and using a switch to control an LED example in one page of C each.  Relies heavily on avr-gcc doing its thing. Avrdude as programming software. Highly recommend [this YouTube series](https://www.youtube.com/playlist?list=PLNyfXcjhOAwOF-7S-ZoW2wuQ6Y-4hfjMR), as the post assumes you already know what it's covered. 
+One folder with both a blink example and using a switch to control an LED example in one page of C each. Avrdude as programming software. Highly recommend [this YouTube series](https://www.youtube.com/playlist?list=PLNyfXcjhOAwOF-7S-ZoW2wuQ6Y-4hfjMR), as the post assumes you already know what it's covered. It doesn't bother with a vector table, etc. It's an ATtiny blinking an LED. YOLO.
 
 ## ARM
 

@@ -27,7 +27,7 @@ SECTIONS {
         *(.rodata, .rodata*) /* read only data */
        
     } > flash /* nothing relocatable */
-    . = ALIGN(4);
+    . = ALIGN(4); /* snap to grid */
     _end_text = .; /* store current location counter value in _end_text */
 
     /* Used by the startup to initialize data with the "originating" address */
