@@ -24,6 +24,7 @@ vector_table:
     .word   pendsv_handler
     .word   systick_handler
     //-------------- peripherals list
+    //SAMD21E18 doesn't do all of them
     .word   PM_Handler
     .word   SYSCTRL_Handler
     .word   WDT_Handler
@@ -37,23 +38,23 @@ vector_table:
     .word   SERCOM1_Handler
     .word   SERCOM2_Handler
     .word   SERCOM3_Handler
-    .word   SERCOM4_Handler
-    .word   SERCOM5_Handler
+    .word   0/*SERCOM4_Handler*/
+    .word   0/*SERCOM5_Handler*/
     .word   TCC0_Handler
     .word   TCC1_Handler
     .word   TCC2_Handler
     .word   TC3_Handler
     .word   TC4_Handler
     .word   TC5_Handler
-    .word   TC6_Handler
-    .word   TC7_Handler
+    .word   0/*TC6_Handler*/
+    .word   0/*TC7_Handler*/
     .word   ADC_Handler
     .word   AC_Handler
     .word   DAC_Handler
     .word   PTC_Handler
     .word   I2S_Handler
     .word   AC1_Handler
-    .word   TCC3_Handler
+    .word   0/*TCC3_Handler*/
 
 .text
 
@@ -84,15 +85,15 @@ default_handler:
 .weakref SERCOM1_Handler, default_handler
 .weakref SERCOM2_Handler, default_handler
 .weakref SERCOM3_Handler, default_handler
-.weakref SERCOM4_Handler, default_handler
-.weakref SERCOM5_Handler, default_handler
+//.weakref SERCOM4_Handler, default_handler
+//.weakref SERCOM5_Handler, default_handler
 .weakref TCC0_Handler, default_handler
 .weakref TCC1_Handler, default_handler
 .weakref TCC2_Handler, default_handler
 .weakref TC3_Handler, default_handler
 .weakref TC4_Handler, default_handler
 .weakref TC5_Handler, default_handler
-.weakref TC6_Handler, default_handler
+////.weakref TC6_Handler, default_handler
 .weakref TC7_Handler, default_handler
 .weakref ADC_Handler, default_handler
 .weakref AC_Handler, default_handler
@@ -100,7 +101,7 @@ default_handler:
 .weakref PTC_Handler, default_handler
 .weakref I2S_Handler, default_handler
 .weakref AC1_Handler, default_handler
-.weakref TCC3_Handler, default_handler
+//.weakref TCC3_Handler, default_handler
 
 
 .section .text.reset_handler
