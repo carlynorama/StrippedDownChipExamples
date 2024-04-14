@@ -42,3 +42,4 @@ pg 31 DS40001882H-page
 through input GPIO mode. The aim is to avoid an eventually extract power consumption (<1mA) due to a not stable level on pad. The port PA24 and PA25 doesn't have Drive Strength option.
 7. SERCOM4 and SERCOM5 are not supported in SAMD21ExxA, SAMD21E15(B/BU/CU/L), SAMD21E16(B/BU/CU/L) and SAMD21E17(D/DU/L). Refer to the 2. Configuration Summary for details.
 8. TCC3 is only supported in SAMD21x17D. Refer to the 2. Configuration Summary for details.
+
