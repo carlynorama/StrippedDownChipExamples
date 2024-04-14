@@ -24,7 +24,7 @@ vector_table:
     .word   pendsv_handler
     .word   systick_handler
     //-------------- peripherals list
-    //SAMD21E18 doesn't do all of them
+    //SAMD21E18 doesn't do all available to the family.
     .word   PM_Handler
     .word   SYSCTRL_Handler
     .word   WDT_Handler
@@ -53,7 +53,7 @@ vector_table:
     .word   DAC_Handler
     .word   PTC_Handler
     .word   I2S_Handler
-    .word   AC1_Handler
+    .word   0/*AC1_Handler*/
     .word   0/*TCC3_Handler*/
 
 .text
