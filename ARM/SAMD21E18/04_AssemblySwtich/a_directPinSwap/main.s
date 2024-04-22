@@ -27,9 +27,9 @@
 _start:
 
 	MOVS R3, #1
-	LSLS R3, R3, #ledPinOffset  //R3 is now LED mask (1 at led pos)
+	LSLS R3, #ledPinOffset  //R3 is now LED mask (1 at led pos)
   MOVS R4, #1  
-	LSLS R4, R4, #switchPinOffset //R5 is now switch mask (1 at switch pos)
+	LSLS R4, #switchPinOffset //R4 is now switch mask (1 at switch pos)
 
   //The DIRSET should have one for every LED and 0 for everys switch.
   //The 0 is the default, but an explicit set will be safe. 
@@ -41,11 +41,11 @@ _start:
 setPullup:
   //---- For using internal pullup only
   LDR R5, =switchPinCNFGOffset //pinConfig closest word location
-  LDR R0, [R5]
-  MOVS R1, #6 //set INEN 1 (bit 1) //set PULLEN 1 (bit 2)
+  LDR R0, [R5] //load current settings into R0
+  MOVS R1, #6 //create value for INEN 1 (bit 1) //set PULLEN 1 (bit 2)
   LSLS R1, #24 //(8*(7-4)) //move it from 4 to 7
-  ORRS R0, R1 //set INEN 1 (bit 1) //set PULLEN 1 (bit 2)
-  STR R0, [R5]
+  ORRS R0, R1 //apply mask
+  STR R0, [R5] //put the updated word back into the config.
   LDR R5, =portA_OUTSET
   STR R4, [R5] //set the out of the switch high
   //--- END setting internal pullup
