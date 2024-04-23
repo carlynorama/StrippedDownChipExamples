@@ -36,6 +36,8 @@ _start:
 
   LDR R5, =portA_DIRSET
   STR R3, [R5]   //move the 1s in for the LEDs
+  LDR R5, =portA_DIRCLR
+  STR R4, [R5]   //move the clear all the switches
 
 setPullup:
   //---- For using internal pullup only

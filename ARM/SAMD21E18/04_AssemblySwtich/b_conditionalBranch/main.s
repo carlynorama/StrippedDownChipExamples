@@ -6,6 +6,7 @@
 .section .text.program_code
 
 .equ portA_address, 0x41004400
+.equ portA_DIRCLR, 0x41004400+0x04
 .equ portA_DIRSET, 0x41004400+0x08
 .equ portA_OUTCLR, 0x41004400+0x14
 .equ portA_OUTSET, 0x41004400+0x18
@@ -35,6 +36,8 @@ _start:
 
   LDR R5, =portA_DIRSET
   STR R3, [R5]   //move the 1s in for the LEDs
+  LDR R5, =portA_DIRCLR
+  STR R4, [R5]   //move the clear all the switches
 
   @ OPTION 1: Set 1 pin
   @ MOVS R0, #switchPinOffset  //put switch # into R0 
