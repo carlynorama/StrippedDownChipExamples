@@ -35,7 +35,6 @@ _start:
 
   LDR R5, =portA_DIRSET
   STR R3, [R5]   //move the 1s in for the LEDs
-  BICS R5, R4    //AND-NOT value in DIRSET with switch mask
 
   @ OPTION 1: Set 1 pin
   @ MOVS R0, #switchPinOffset  //put switch # into R0 
