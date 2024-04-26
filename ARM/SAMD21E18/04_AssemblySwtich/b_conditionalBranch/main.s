@@ -27,9 +27,9 @@
 _start:
 
 
-  MOVS R3, #1
-  LSLS R4, R3, #switchPinOffset //R4 is now switch mask (1 at switch pos)
-  LSLS R3, #ledPinOffset  //R3 is now LED mask (1 at led pos)
+  MOVS R4, #1 
+  LSLS R3, R4, #ledPinOffset //R3 is now LED mask (1 at led pos)
+  LSLS R4, #switchPinOffset  //R4 is now switch mask (1 at switch pos)
 
   //The DIRSET should have one for every LED and 0 for everys switch.
   //The 0 is the default, but an explicit set will be safe. 
@@ -37,7 +37,7 @@ _start:
   LDR R5, =portA_DIRSET
   STR R3, [R5]   //move the 1s in for the LEDs
   LDR R5, =portA_DIRCLR
-  STR R4, [R5]   //move the clear all the switches
+  STR R4, [R5]   //clear all the switches
 
   @ OPTION 1: Set 1 pin
   @ MOVS R0, #switchPinOffset  //put switch # into R0 
@@ -94,7 +94,7 @@ multiPinPullup:
   TST  R0, R2
   BEQ  mpp_upperHalf
   MOVS R1, R0  // copy R0 for editing
-  AND R1, R2   //isolate bottom half
+  ANDS R1, R2   //isolate bottom half
   ORRS R1, R3  // update R1 with settings 
   LDR R2, =portA_WRCONFIG
   STR R1, [R2] // send WRCONFIG bottom half info
