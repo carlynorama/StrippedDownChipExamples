@@ -31,7 +31,7 @@ Proof that the tool chain works. Minimum code + linker file to twiddle registers
 
 #### 02_AssemblyStartup (no bootloader)
 
-- 
+- https://www.whynotestflight.com/excuses/how-can-i-get-this-samd21e18-startup-code-a-little-sturdier/
 
 Still 100% this new fangled Assembly with dots and C style comments and things! Warning - I need to find a linter. Went to a thumb-only compliant syntax that doesn't require the .type macros to see the difference.  2 Folders 
     
@@ -39,6 +39,32 @@ Still 100% this new fangled Assembly with dots and C style comments and things! 
 
     - works from previous folder into a 2 page setup with a startup.s and main.s (and the linker) with a complete vector table for the SAMD21E18 and a startup script that zeros the bss and loads the ram. Lots of variables in main.s to test that it worked. 
 
+#### 03_AssemblyBlink (no bootloader)
+
+- https://www.whynotestflight.com/excuses/its-alive-samd21e18a-assembly-no-sdk/
+
+Just what's on the tin! (Uses TGL register.)
+
+
+#### 04_AssemblySwitch (no bootloader)
+
+- https://www.whynotestflight.com/excuses/and-now-for-3-ways-to-set-an-internal-pullup/
+
+Shows 3 ways to set an internal pullup. 
+
+#### 05_Structure (no bootloader)
+
+- https://www.whynotestflight.com/excuses/itd-make-sense-to-do-some-toolchain-clean-up/
+
+Project structure reorg and Makefile improvements
+
+### Coretex-M0+ - SAMD21G18 (ItsyBitsyM0+ on a Breadboard)
+
+#### 01_AssemblySwitch (no bootloader)
+
+- https://www.whynotestflight.com/excuses/neat-switching-to-the-itsybitsy-just...-works/
+
+Revamp of SAMD21E18 05_Structure, but now on the ItsyBitsy on a less janky circuit. 
 
 
 
