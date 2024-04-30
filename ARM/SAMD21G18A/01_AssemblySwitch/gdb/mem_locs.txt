@@ -1,0 +1,6 @@
+#for the direction set
+x/1x 0x41004400
+#for the current output values
+x/1x 0x41004410
+#for the PINCFG settings, PA07 is top
+x/1x 0x41004444 

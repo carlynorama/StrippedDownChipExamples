@@ -1,0 +1,11 @@
+*.hex
+*.lss
+*.out
+*.o
+*.elf
+*.map
+*.less
+
+
+*.pdf
+*.zip
